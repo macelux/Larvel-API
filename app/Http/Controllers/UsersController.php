@@ -32,9 +32,9 @@ class UsersController extends Controller
             return response()->json([
                 'login' => true,
                 'username'=> Auth::user()->name
-            ],200); 
+            ],200);
 
-        }  
+        }
         else{
             return response()->json([
                 'data' => 'invalid login details'
@@ -50,7 +50,7 @@ class UsersController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password ? $request->password: '12345' ; 
+        $user->password = $request->password ? $request->password: '12345' ;
 
         if($user->save()){
             return new UserResource($user);
