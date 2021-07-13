@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\MessageBag as MessageBagContract;
 use Illuminate\Contracts\Support\MessageProvider;
 use JsonSerializable;
+use ReturnTypeWillChange;
 
 class MessageBag implements Arrayable, Countable, Jsonable, JsonSerializable, MessageBagContract, MessageProvider
 {
@@ -64,6 +65,19 @@ class MessageBag implements Arrayable, Countable, Jsonable, JsonSerializable, Me
         }
 
         return $this;
+    }
+
+    /**
+     * Add a message to the message bag if the given conditional is "true".
+     *
+     * @param  bool  $boolean
+     * @param  string  $key
+     * @param  string  $message
+     * @return $this
+     */
+    public function addIf($boolean, $key, $message)
+    {
+        return $boolean ? $this->add($key, $message) : $this;
     }
 
     /**
@@ -376,6 +390,7 @@ class MessageBag implements Arrayable, Countable, Jsonable, JsonSerializable, Me
      *
      * @return array
      */
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->toArray();

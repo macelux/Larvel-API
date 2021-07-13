@@ -5,10 +5,13 @@ namespace Illuminate\Http\Client;
 use ArrayAccess;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Support\Traits\Macroable;
 use LogicException;
 
 class Request implements ArrayAccess
 {
+    use Macroable;
+
     /**
      * The underlying PSR request.
      *
@@ -242,6 +245,16 @@ class Request implements ArrayAccess
         $this->data = $data;
 
         return $this;
+    }
+
+    /**
+     * Get the underlying PSR compliant request instance.
+     *
+     * @return \Psr\Http\Message\RequestInterface
+     */
+    public function toPsrRequest()
+    {
+        return $this->request;
     }
 
     /**
