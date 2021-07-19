@@ -15,11 +15,12 @@ class AuthController extends Controller
         $validator = Validator::make($request->all() ,[
             'name'=>'required',
             'email'=>'required|email|unique:users',
-            'password'=>'required'
+            'password'=>'required',
+
         ]) ;
         if($validator -> fails())
         {
-            return response(['errors' , $validator->errors()->all()]  , 422);
+            return response(['errors' , $validator->errors()->all()]  , 400);
         }
 
 
@@ -27,12 +28,14 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+
 //
         ]);
-        $accesstoken = $user->createToken('authToken')->accessToken;
 
+        $user->api_token= $user->createToken('authToken')->accessToken;
+        $user ->save();
 
-        return response(['user' => $user , 'accesstoken ' , $accesstoken]);
+        return response(['user' => $user , 'accesstoken ' , $user->api_token]);
     }
     public function login(Request $request)
     {
@@ -44,7 +47,7 @@ class AuthController extends Controller
         ]);
         if($validator -> fails())
         {
-            return response(['errors' => $validator->errors() -> all()]  ,422);
+            return response(['errors' => $validator->errors() -> all()]  ,400);
         }
         $user = User::where('email' , $request->email) ->first();
         if($user)
@@ -52,14 +55,15 @@ class AuthController extends Controller
             if(Hash::check($request->password , $user->password))
             {
 
-                $accesstoken = $user->createToken('authToken')->accessToken;
-                return response(['user' =>$user , 'access_token' => $accesstoken]);
+                $user->api_token= $user->createToken('authToken')->accessToken;
+                $user->save();
+                return response(['user'=>$user , 'access_token' => $user->api_token]);
 
             }
             else
             {
                 $response = ["message" => "Password mismatch"];
-                return response($response, 422);
+                return response($response, 400);
             }
         }
         else

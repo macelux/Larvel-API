@@ -13,17 +13,17 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/register', 'Api\AuthController@register');
+Route::post('/login', 'Api\AuthController@login');
+Route::middleware('auth:api')->group(function (){
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::get('users', 'UsersController@index');
+    Route::get('user/{id}', 'UsersController@show');
+    Route::get('users', 'UsersController@index');
+    Route::put('user/{id}', 'UsersController@update');
+    Route::delete('user/{id}', 'UsersController@destroy');
+
 });
 
- Route::get('users', 'UsersController@index');
 
-Route::get('user/{id}', 'UsersController@show');
 
-Route::get('users', 'UsersController@index');
- Route::post('/register', 'Api\AuthController@register');
- Route::post('/login', 'Api\AuthController@login');
- Route::put('user/{id}', 'UsersController@update');
- Route::delete('user/{id}', 'UsersController@destroy');
