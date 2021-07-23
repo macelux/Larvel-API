@@ -692,7 +692,6 @@ class Connection implements ConnectionInterface
             throw new QueryException(
                 $query, $this->prepareBindings($bindings), $e
             );
-
         }
 
         return $result;
