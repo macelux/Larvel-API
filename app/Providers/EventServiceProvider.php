@@ -17,11 +17,16 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+
         ],
+
+        Created::class => [
+            SendCreationNotification::class,
+        ]
     ];
 
     /**
-     * Register any events for your application.
+     * Register any Events for your application.
      *
      * @return void
      */

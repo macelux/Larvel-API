@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\order;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use Faker\Generator as Faker;
 class OrderFactory extends Factory
 {
     /**
@@ -12,7 +12,7 @@ class OrderFactory extends Factory
      *
      * @var string
      */
-    protected $model = order::class;
+    protected $model = Order::class;
 
     /**
      * Define the model's default state.

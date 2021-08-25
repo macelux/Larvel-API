@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Handler extends ExceptionHandler
 {
@@ -36,7 +37,8 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
-        parent::report($exception);
+
+
     }
 
     /**
@@ -50,6 +52,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if($exception instanceof ModelNotFoundException)
+            return response(["message" => "the id is invalid"] , 404);
         return parent::render($request, $exception);
+    }
+    public function register()
+    {
+
+    }
+    public function handleModelNotFoundException(ModelNotFoundException $exception)
+    {
+        if($exception instanceof ModelNotFoundException)
+            return response(["message" => "The id is invalid"] , 400);
     }
 }

@@ -19,10 +19,13 @@ class JwtMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+//        $user = JWTAuth::parseToken()->authenticate();
          try 
         {
             $user = JWTAuth::parseToken()->authenticate();
-        } 
+
+        }
+
         catch (Exception $e) 
         {
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException)
@@ -35,6 +38,8 @@ class JwtMiddleware
             }
             else
             {
+//                if($user->id == "")
+//                    return responses(["message" => "the token is expired becuase user has been deleted"]);
                 return response()->json(['status' => 'Authorization Token not found']);
             }
         }

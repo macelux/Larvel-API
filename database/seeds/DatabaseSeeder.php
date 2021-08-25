@@ -1,7 +1,13 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
+use App\Models\User;
+use App\Models\Admin;
+use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
+
+
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,6 +18,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(50)->create();
+        $admin = new Admin();
+
+        $admin->name = "enoch";
+        $admin->email = "profe@gmail.com";
+        $admin->password = Hash::make('Wool1234');
+        $admin->is_super = 1;
+        $admin->save();
+
+
+        
+
+
     }
 }
