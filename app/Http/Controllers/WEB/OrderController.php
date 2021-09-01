@@ -17,14 +17,18 @@ class OrderController extends Controller
             $Orders[$i]->count = $i + 1;
 
         }
-//        dd($Orders);
+
 
         return view('pages.orders' , compact('Orders'));
     }
     public function show($id)
     {
         $order = Order::find($id);
-//        dd($order);
+
+
+
+
+
 
         return view('admin.orders.show', compact('order'));
     }
@@ -32,6 +36,7 @@ class OrderController extends Controller
     public function edit($id)
     {
         $order= Order::findorfail($id);
+
         return view('admin.orders.edit', compact('order'));
     }
 
@@ -43,6 +48,7 @@ class OrderController extends Controller
 
         $order= Order::findorfail($request->order_id);
         $order->update($params);
+        $order->save();
         session()->flash("message" , "Order updated Sucessfully");
         return redirect()->route('orders.index');
 

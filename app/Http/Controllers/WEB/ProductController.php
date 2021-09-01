@@ -33,7 +33,7 @@ class ProductController
 
     public function store(StoreProductRequest $request)
     {
-//        return "cool";
+
         $params = $request->except('_token');
 
         $product = Product::create($params);
@@ -41,10 +41,7 @@ class ProductController
         session()->flash("message" , "Product added Sucessfully");
         return redirect()->route('products.index');
 
-//        dd("")
 
-
-//        event(new Created($product));
 
 
 

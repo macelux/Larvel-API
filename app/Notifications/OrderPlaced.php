@@ -56,7 +56,7 @@ class OrderPlaced extends Notification
     public function toArray($notifiable)
     {
         return [
-            'customer_id' => $this->order->customer_id,
+            'message' => 'a new order has been placed',
 
 //
         ];

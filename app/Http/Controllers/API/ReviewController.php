@@ -24,7 +24,7 @@ class ReviewController extends Controller
             return  new  ReviewResource($Review);
 
 
-        //return response()->json($user);
+
     }
     public function store(StoreReviewRequest $request)
     {
@@ -63,7 +63,7 @@ class ReviewController extends Controller
 
     public function destroy($id)
     {
-        // get user
+
         $Review = Review::findorfail($id);
         if(auth()->user()->id  == $Review->customer_id)
         {

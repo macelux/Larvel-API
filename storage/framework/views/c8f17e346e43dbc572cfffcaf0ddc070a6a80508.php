@@ -5,6 +5,17 @@
      <link rel="stylesheet" href="/css/admin_custom.css">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
+    <?php if(session()->has('message')): ?>
+
+
+        <div class="alert alert-success bg-green">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <?php echo e(session('message')); ?>
+
+        </div>
+    <?php endif; ?>
     <div class="app-title">
         <div>
             <h1><i class="fa fa-shopping-bag"></i> <?php echo e('Edit Admin'); ?> </h1>
@@ -80,36 +91,7 @@ unset($__errorArgs, $__bag); ?>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tile-body">
-                                    <div class="form-group">
-                                        <label class="control-label" for="password">Password</label>
-                                        <input
-                                                class="form-control <?php $__errorArgs = ['password'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                                                type="text"
-                                                placeholder="Enter attribute password"
-                                                id="password"
-                                                name="password"
-                                                value="<?php echo e(old('password' , $Admin->password)); ?>"
-                                        />
-                                        <div class="invalid-feedback active">
-                                            <i class="fa fa-exclamation-circle fa-fw"></i> <?php $__errorArgs = ['password'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> <span><?php echo e($message); ?></span> <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="tile-footer">
                                 <div class="row d-print-none mt-2">

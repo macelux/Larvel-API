@@ -11,7 +11,17 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
+    <?php if(session()->has('message')): ?>
 
+
+        <div class="alert alert-success bg-green">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <?php echo e(session('message')); ?>
+
+        </div>
+    <?php endif; ?>
 
 
 

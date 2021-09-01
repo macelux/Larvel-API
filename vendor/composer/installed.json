@@ -704,17 +704,17 @@
         },
         {
             "name": "facade/ignition",
-            "version": "2.11.4",
-            "version_normalized": "2.11.4.0",
+            "version": "2.12.0",
+            "version_normalized": "2.12.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "1b8d83c5dac7c5ee8429daf284ce3f19b1d17ea2"
+                "reference": "74dcc32a2895a126d1e5f2cd3bbab499cac66db1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/1b8d83c5dac7c5ee8429daf284ce3f19b1d17ea2",
-                "reference": "1b8d83c5dac7c5ee8429daf284ce3f19b1d17ea2",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/74dcc32a2895a126d1e5f2cd3bbab499cac66db1",
+                "reference": "74dcc32a2895a126d1e5f2cd3bbab499cac66db1",
                 "shasum": ""
             },
             "require": {
@@ -737,7 +737,7 @@
             "suggest": {
                 "laravel/telescope": "^3.1"
             },
-            "time": "2021-08-17T11:45:33+00:00",
+            "time": "2021-08-24T09:53:54+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1546,17 +1546,17 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.55.0",
-            "version_normalized": "8.55.0.0",
+            "version": "v8.56.0",
+            "version_normalized": "8.56.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "997e2aa23e9103137715018ae926c52f8a1703f2"
+                "reference": "d700f336dc672dcbfe46db05d4e5fe9347b3a5b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/997e2aa23e9103137715018ae926c52f8a1703f2",
-                "reference": "997e2aa23e9103137715018ae926c52f8a1703f2",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d700f336dc672dcbfe46db05d4e5fe9347b3a5b6",
+                "reference": "d700f336dc672dcbfe46db05d4e5fe9347b3a5b6",
                 "shasum": ""
             },
             "require": {
@@ -1670,7 +1670,7 @@
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^2.0).",
                 "wildbit/swiftmailer-postmark": "Required to use Postmark mail driver (^3.0)."
             },
-            "time": "2021-08-17T14:13:34+00:00",
+            "time": "2021-08-24T13:46:30+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1714,6 +1714,81 @@
                 "source": "https://github.com/laravel/framework"
             },
             "install-path": "../laravel/framework"
+        },
+        {
+            "name": "laravel/scout",
+            "version": "v9.2.7",
+            "version_normalized": "9.2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/scout.git",
+                "reference": "0c2e25a431113cc0510ddc9680cdec6ef115be4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/0c2e25a431113cc0510ddc9680cdec6ef115be4e",
+                "reference": "0c2e25a431113cc0510ddc9680cdec6ef115be4e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/bus": "^8.0",
+                "illuminate/contracts": "^8.0",
+                "illuminate/database": "^8.0",
+                "illuminate/http": "^8.0",
+                "illuminate/pagination": "^8.0",
+                "illuminate/queue": "^8.0",
+                "illuminate/support": "^8.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "meilisearch/meilisearch-php": "^0.17",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^6.17",
+                "phpunit/phpunit": "^9.3"
+            },
+            "suggest": {
+                "algolia/algoliasearch-client-php": "Required to use the Algolia engine (^2.2).",
+                "meilisearch/meilisearch-php": "Required to use the MeiliSearch engine (^0.17)."
+            },
+            "time": "2021-08-24T12:57:33+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "9.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Scout\\ScoutServiceProvider"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Scout\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel Scout provides a driver based solution to searching your Eloquent models.",
+            "keywords": [
+                "algolia",
+                "laravel",
+                "search"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/scout/issues",
+                "source": "https://github.com/laravel/scout"
+            },
+            "install-path": "../laravel/scout"
         },
         {
             "name": "laravel/telescope",
@@ -2964,17 +3039,17 @@
         },
         {
             "name": "nunomaduro/collision",
-            "version": "v5.8.0",
-            "version_normalized": "5.8.0.0",
+            "version": "v5.9.0",
+            "version_normalized": "5.9.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/collision.git",
-                "reference": "0c3c393462eada1233513664e2d22bb9f69ca393"
+                "reference": "63456f5c3e8c4bc52bd573e5c85674d64d84fd43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/0c3c393462eada1233513664e2d22bb9f69ca393",
-                "reference": "0c3c393462eada1233513664e2d22bb9f69ca393",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/63456f5c3e8c4bc52bd573e5c85674d64d84fd43",
+                "reference": "63456f5c3e8c4bc52bd573e5c85674d64d84fd43",
                 "shasum": ""
             },
             "require": {
@@ -2995,7 +3070,7 @@
                 "phpstan/phpstan": "^0.12.64",
                 "phpunit/phpunit": "^9.5.0"
             },
-            "time": "2021-08-13T14:23:01+00:00",
+            "time": "2021-08-26T15:32:09+00:00",
             "type": "library",
             "extra": {
                 "laravel": {

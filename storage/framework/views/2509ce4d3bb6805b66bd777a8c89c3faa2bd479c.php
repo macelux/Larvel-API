@@ -46,15 +46,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $__currentLoopData = $order->items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php for($i = 0 ; $i < count($order->items);$i++): ?>
                                         <tr>
-                                            <td><?php echo e($item->id); ?></td>
-                                            <td><?php echo e($item->product->name); ?></td>
-                                            <td><?php echo e($item->product->sku); ?></td>
-                                            <td><?php echo e($item->quantity); ?></td>
-                                            <td><?php echo e(config('settings.currency_symbol')); ?><?php echo e(round($item->price, 2)); ?></td>
+                                            <td><?php echo e($i + 1); ?></td>
+                                            <td><?php echo e($order->items[$i]->product->name); ?></td>
+                                            <td><?php echo e($order->items[$i]->product->sku); ?></td>
+                                            <td><?php echo e($order->items[$i]->quantity); ?></td>
+                                            <td><?php echo e(config('settings.currency_symbol')); ?><?php echo e(round($order->items[$i]->price, 2)); ?></td>
                                         </tr>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endfor; ?>
+
                                     <tr>
                                         <td class="font-weight-bold"> Grand Total</td>
                                         <td></td>

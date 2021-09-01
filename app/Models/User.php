@@ -16,9 +16,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 
+
 class User extends Authenticatable implements JWTSubject
 
 {
+    protected $table = 'users';
     use HasFactory;
     use Notifiable;
 //    use SoftDeletes;

@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -18,6 +19,7 @@ class UsersController extends Controller
     {
 
         $user = User::findorfail($id);
+
 
         if(auth()->user()->id == $id)
             return  new UserResource($user);
@@ -27,9 +29,15 @@ class UsersController extends Controller
     }
 
 
-    public function update(UpdateUserRequest $request , $id)
+    public function update(Request $request , $id)
     {
         $user = User::findorfail($id);
+        $request->validate([
+            'first_name' => [ 'string', 'max:255'],
+            'last_name' => [ 'string', 'max:255'],
+            'email' =>  ['email' , Rule::unique('users')->ignore($user)]
+
+        ]);
         if(auth()->user()->id  == $id)
         {
             $params = $request->except('_token');

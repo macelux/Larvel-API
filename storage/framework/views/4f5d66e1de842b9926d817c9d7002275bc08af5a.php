@@ -5,7 +5,7 @@
 <?php $__env->startSection('title', 'Users'); ?>
 
 <?php $__env->startSection('content_header'); ?>
-    <h1>Users</h1>
+    <h1>Reviews</h1>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>

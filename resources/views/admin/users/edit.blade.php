@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label" for="email">	email</label>
                                     <input
@@ -72,22 +72,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label" for="password">	password</label>
-                                    <input
-                                            class="form-control @error('password') is-invalid @enderror"
-                                            type="text"
-                                            placeholder="Enter user password"
-                                            id="password"
-                                            name="password"
-                                            value=""
-                                    />
-                                    <div class="invalid-feedback active">
-                                        <i class="fa fa-exclamation-circle fa-fw"></i> @error('password') <span>{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
 
                         <div class="row">

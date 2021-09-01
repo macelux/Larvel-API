@@ -46,15 +46,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($order->items as $item)
+                                    @for($i = 0 ; $i < count($order->items);$i++)
                                         <tr>
-                                            <td>{{ $item->id }}</td>
-                                            <td>{{ $item->product->name }}</td>
-                                            <td>{{ $item->product->sku }}</td>
-                                            <td>{{ $item->quantity  }}</td>
-                                            <td>{{ config('settings.currency_symbol') }}{{ round($item->price, 2) }}</td>
+                                            <td>{{ $i + 1 }}</td>
+                                            <td>{{ $order->items[$i]->product->name }}</td>
+                                            <td>{{$order->items[$i]->product->sku }}</td>
+                                            <td>{{ $order->items[$i]->quantity  }}</td>
+                                            <td>{{ config('settings.currency_symbol') }}{{ round($order->items[$i]->price, 2) }}</td>
                                         </tr>
-                                    @endforeach
+                                    @endfor
+
                                     <tr>
                                         <td class="font-weight-bold"> Grand Total</td>
                                         <td></td>

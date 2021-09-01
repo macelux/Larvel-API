@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
+use App\Models\CartProduct;
+use App\Notifications\OrderPlaced;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
@@ -37,12 +41,12 @@ class CheckoutController extends Controller
         $gTotal = 0;
         $itCount = 0;
 
+       $cartitems =  collect(CartProduct::where('cart_id' , $request->cart_id)->get());
 
-
-        for($i = 0 ; $i < count($cart->cart_items); $i++)
+        foreach ($cartitems as $item)
         {
-            $gTotal += $cart->cart_items[$i]->Price;
-            $itCount += $cart->cart_items[$i]->quantity;
+            $gTotal +=$item->Price;
+            $itCount += $item->quantity;
         }
         $order = Order::create([
             'order_number'      =>  'ORD-'.strtoupper(uniqid()),
@@ -59,18 +63,17 @@ class CheckoutController extends Controller
             'phone_number'      =>  $params['phone_number'],
 
         ]);
-        $order->save();
+
 
         if ($order)
         {
 
-            $items = $cart->cart_items;
+            $items = collect(CartProduct::where('cart_id', $params['cart_id'])->get());
 
             foreach ($items as $item)
             {
 
                 $product = Product::where('id', $item->product_id)->first();
-
                 $orderItem = new OrderItem([
                     'order_id' => $order->id,
                     'product_id'    =>  $product->id,
@@ -80,15 +83,10 @@ class CheckoutController extends Controller
 
                 $orderItem->save();
             }
-            foreach($cart->cart_items as $item)
-            {
-                $item->delete();
-                $item->pivot->deleted_at = Carbon::now();
-                $item->pivot->save();
-            }
-
             $cart->delete();
+            Notification::send(Admin::all() , new OrderPlaced($order));
             return new OrderResource($order);
+
         }
 
 

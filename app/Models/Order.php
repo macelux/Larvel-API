@@ -24,4 +24,19 @@ class Order extends Model
         return $this->belongsToMany(Product::class , 'order_items' ,'order_id' , 'product_id');
     }
 
+    public function getPaymentStatusAttribute()
+    {
+        $val = ($this->attributes['payment_status'] == 1?"paid":"not paid");
+        return $val;
+
+    }
+    public function setPaymentStatusAttribute($value)
+    {
+        $value = "paid"?1:0;
+//        $this->
+        $this->attributes['payment_status'] =$value;
+    }
+    protected $casts = [
+        'payment_status' => 'boolean',
+    ];
 }

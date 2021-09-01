@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WEB\Authcontroller;
@@ -14,6 +14,12 @@ use App\Http\Controllers\WEB\AdminController;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\WEB\NotificationsController;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
+use App\Http\Controllers\WEB\ResetPasswordController;
 use App\Http\Controllers\FileUpload;
 use App\Http\Controllers\API\CartController;
 use Illuminate\Support\Facades\Storage;
@@ -41,33 +47,65 @@ use Illuminate\Support\Facades\Storage;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('cart/show/{id}' ,[CartController::class , 'getCart']);
-Route::get('/file' , function (){
-//     Storage::disk('local')->download('example.txt');
-//    Storage::disk('local')->move('example.txt' , 'text/example.txt');
-    return Storage::allfiles('/');
-//    Storage::temporaryUrl('example.txt' , now()->addMinutes(5));
-//    if (Storage::disk('local')->missing('example.txt'))
-//        return Storage::get('example.txt');
-//    if(Storage::disk('local')->missing('cool'))
-//        return "missing";
-//    $disk = Storage::build([
-//
-//    ]);
-//    $path = Storage::disk('local')->put('example.txt' , 'cool');
-//    return $path;
-});
-Route::get('/modal' , fn() =>view('modals/create'));
-Route::get('/clear/{id}' , [CartController::class , 'clearCart']);
-Route::resource('photos' , PhotoController::class );
-//Route::get('/link' , function (){
-//    return asset(storage/app/storage/profile pic.jpg);
-//});
-Route::get('/upload-file', [FileUpload::class, 'createForm']);
-Route::post('/upload-file', [FileUpload::class, 'fileUpload'])->name('fileUpload');
+
+Route::get('/forgot-password', function () {
+    return view('auth.passwords.email');
+})->middleware('guest')->name('password.request');
+
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+
+    $status = Password::broker('admins')->sendResetLink(
+        $request->only('email')
+    );
+
+    return $status === Password::RESET_LINK_SENT
+        ? back()->with(['status' => __($status)])
+        : back()->withErrors(['email' => __($status)]);
+})->middleware('guest')->name('password.email');
+
+Route::get('/reset-password/{token}', function ($token) {
+    return view('auth.passwords.reset', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
+
+
+Route::post('/reset-password', function (Request $request) {
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    $status = Password::broker('admins')->reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function ($user, $password) {
+            $user->forceFill([
+                'password' => Hash::make($password)
+            ])->setRememberToken(Str::random(60));
+
+            $user->save();
+
+            event(new PasswordReset($user));
+        }
+    );
+
+    return $status === Password::PASSWORD_RESET
+        ? redirect()->route('login')->with('status', __($status))
+        : back()->withErrors(['email' => [__($status)]]);
+})->middleware('guest')->name('password.update');
+
+
+
+
 
 
 Route::get('/email/verify' , fn() => view('auth/verify'))->middleware('auth:admin')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect()->route('home');
+})->middleware(['auth:admin', 'signed'])->name('verification.verify');
 
 Route::get('/' , function () {
 
@@ -79,9 +117,7 @@ Route::get('/' , function () {
             event(new Registered(Auth::guard('admin')->user()));
             return redirect() -> route('verification.notice');
         }
-        else
-        {
-        }
+
 
             return redirect() -> route('admin.dashboard');
     }
@@ -109,23 +145,10 @@ Route::post('/logout', [Authcontroller::class,'logout'])->name('logout');
 
 
 //
- Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-
-     $request->fulfill();
-//     return $request->id;
-//     return auth()->user();
-
-//     if(auth()->user())
-//     {
-//         return response(["message" => "email verfied succesfully"]);
-//     }
-//     else
-        return redirect()->route('home');
- })->middleware(['auth:admin', 'signed'])->name('verification.verify');
-// Route::get('/email/verify/{id}/{hash}', [V])->middleware(['auth:admin', 'signed'])->name('verification.verify');
 
 
-    Route::post('/email/verification-notification', function (Request $request) {
+
+ Route::post('/email/verification-notification', function (Request $request) {
     	$request->user()->sendEmailVerificationNotification();
     	return back()->with('message' , 'Verification link sent!');
 

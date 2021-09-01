@@ -79,22 +79,15 @@
     
     <?php if($password_reset_url): ?>
         <p class="my-0">
-            <a href="<?php echo e($password_reset_url); ?>">
+            <a href="<?php echo e(route('password.request')); ?>">
                 <?php echo e(__('adminlte::adminlte.i_forgot_my_password')); ?>
 
             </a>
         </p>
     <?php endif; ?>
 
-    
-    <?php if($register_url): ?>
-        <p class="my-0">
-            <a href="<?php echo e(route('register')); ?>">
-                <?php echo e(__('adminlte::adminlte.register_a_new_membership')); ?>
 
-            </a>
-        </p>
-    <?php endif; ?>
+
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('adminlte::auth.auth-page', ['auth_type' => 'login'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Larvel-API\resources\views/vendor/adminlte/auth/login.blade.php ENDPATH**/ ?>

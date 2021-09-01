@@ -85,7 +85,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label" for="email">	email</label>
                                     <input
@@ -114,36 +114,7 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label" for="password">	password</label>
-                                    <input
-                                            class="form-control <?php $__errorArgs = ['password'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                                            type="text"
-                                            placeholder="Enter user password"
-                                            id="password"
-                                            name="password"
-                                            value=""
-                                    />
-                                    <div class="invalid-feedback active">
-                                        <i class="fa fa-exclamation-circle fa-fw"></i> <?php $__errorArgs = ['password'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> <span><?php echo e($message); ?></span> <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
 
                         <div class="row">

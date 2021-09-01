@@ -5,6 +5,16 @@
      <link rel="stylesheet" href="/css/admin_custom.css">
 @endsection
 @section('content')
+    @if(session()->has('message'))
+
+
+        <div class="alert alert-success bg-green">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{session('message')}}
+        </div>
+    @endif
     <div class="app-title">
         <div>
             <h1><i class="fa fa-shopping-bag"></i> {{ 'Edit Admin' }} </h1>
@@ -52,22 +62,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tile-body">
-                                    <div class="form-group">
-                                        <label class="control-label" for="password">Password</label>
-                                        <input
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                type="text"
-                                                placeholder="Enter attribute password"
-                                                id="password"
-                                                name="password"
-                                                value="{{ old('password' , $Admin->password) }}"
-                                        />
-                                        <div class="invalid-feedback active">
-                                            <i class="fa fa-exclamation-circle fa-fw"></i> @error('password') <span>{{ $message }}</span> @enderror
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="tile-footer">
                                 <div class="row d-print-none mt-2">

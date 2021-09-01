@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\API\AuthController;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -37,26 +39,22 @@ class UsersController extends Controller
         return view('admin.users.edit', compact('User'));
     }
 
-    public function update(UpdateUserRequest $request)
+    public function update(Request $request)
     {
-      
+
       $params = $request->except('_token' , 'password' , 'email');
       $User = User::findorfail($request->user_id);
-      $User->update($params);
-      if($request->password == "")
-          $User->save();
-      else
-          $User->password  = Hash::make($request->password);
-        $User->save();
 
-        if($request->email== "")
-            $User->save();
-        else if($User->email == $request->email)
-            $User->save();
-        else
-            $User->email = $request->email;
-        $User->save();
-        session()->flash("message" , "User added Sucessfully");
+        $request->validate([
+            'first_name' => [ 'string', 'max:255'],
+            'last_name' => [ 'string', 'max:255'],
+
+            'email' =>  ['email' , Rule::unique('users')->ignore($User)]
+
+        ]);
+      $User->update($params);
+      $User->save();
+        session()->flash("message" , "User updated Sucessfully");
         return redirect()->route('users.index');
      
     }
@@ -64,14 +62,6 @@ class UsersController extends Controller
     {
         
         $User = User::findorfail($id);
-//        (new AuthController())->logout();
-//        if(auth('api')->logout())
-//            return "true";
-
-
-//        return "cool";
-//        $token =  auth()->tokenById($id);
-//        return $token;
         $User->delete();
         session()->flash("message" , "User deleted Sucessfully");
 

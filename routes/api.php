@@ -51,7 +51,7 @@ Route::group(['middleware' => ['jwt.verify']] , function(){
         Route::get('/create' , [CartController::class , 'createCart']);
         Route::get('/show/{id}' ,[CartController::class , 'getCart']);
         Route::post('/store' , [CartController::class , 'addToCart']);
-        Route::delete('/delete/{id}' , [CartController::class , 'removeItem']);
+        Route::delete('/delete' , [CartController::class , 'removeItem']);
         Route::delete('/clear/{id}' , [CartController::class , 'clearCart']);
     });
     Route::post('/checkout/order', 'API\CheckoutController@placeOrder')->name('checkout.place.order');

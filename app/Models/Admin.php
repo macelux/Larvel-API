@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-
-class Admin extends Authenticatable implements MustVerifyEmail
+use Illuminate\Contracts\Auth\CanResetPassword;
+//
+//
+//, CanResetPassword
+class Admin extends Authenticatable implements MustVerifyEmail , CanResetPassword
 {
     use Notifiable;
+    use \Illuminate\Auth\Passwords\CanResetPassword;
     
     protected $guard = 'admin';
     protected $table = 'admins';
@@ -21,7 +24,8 @@ class Admin extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token', 'is_super'
     ];
     protected $casts = [
-        'email_verified_at' => 'datetime'
+        'email_verified_at' => 'datetime',
+        'data' => 'array'
     ];
 
 

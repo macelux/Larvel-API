@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdateAdminRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
 
 
 class AdminController extends Controller
@@ -30,14 +34,16 @@ class AdminController extends Controller
         $admin = Admin::create($params);
         $admin->password = Hash::make($request->password);
         $admin->save();
+        session()->flash("message" , "Admin registered Sucessfully , Email verifcation needed to activate account");
         event(new Registered($admin));
-        session()->flash("message" , "Admin added Sucessfully");
-        return redirect()->route('verification.notice');
+
+        return redirect()->route('admins.index');
+
 
     }
     public function index()
     {
-//        dd(auth::guard('admin')->user()->is_super);
+
         $Admins = Admin::all();
         for($i  = 0 ; $i < count($Admins) ; $i++)
         {
@@ -48,12 +54,11 @@ class AdminController extends Controller
 
 
     }
-//
-//
-//
+
     public function editprofile()
     {
         $Admin = Auth::guard('admin')->user();
+        session()->put('url.intended' , URL::current());
         return view('admin.admin.edit', compact('Admin'));
     }
 
@@ -62,23 +67,25 @@ class AdminController extends Controller
 
 
         $Admin = Admin::findorfail($id);
-
-
-
+        session()->put('url.intended' , URL::previous());
         return view('admin.admin.edit', compact('Admin'));
     }
-//
-    public function update(UpdateAdminRequest $request)
+
+    public function update(Request $request)
     {
 
         $params = $request->except('_token');
         $Admin =Admin::findorfail($request->admin_id);
+        $request->validate([
+            'name' => [ 'string', 'max:255'],
+            'email' =>  ['email' , Rule::unique('users')->ignore($Admin)],
+
+        ]);
+
         $Admin->update($params);
         session()->flash("message" , "Admin updated Sucessfully");
-        if(Gate::allows('is_super_admin'))
-            return redirect()->route('admins.index');
-        else
-            return redirect()->route('admin.dashboard');
+        return Redirect::intended('/');
+
     }
     public function destroy($id)
     {

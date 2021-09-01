@@ -14,24 +14,24 @@ class NotificationsController extends Controller
     public  function getNotificationsData()
     {
         $Admin = Auth::guard('admin')->user();
-        $orderNotifications= $Admin->notifications->where('type','App\Notifications\UserDeleted');
-        $userdelNotifications = $Admin->notifications->where('type','App\Notifications\UserDeleted');
-//        dd($userdelNotifications);
-        $created_at = [];
-
-        for($i = 0 ; $i < count($Admin-> notifications);$i++)
-            $created_at[$i] = Carbon::parse($Admin->notifications[$i]->created_at);
-                for($j = 0 ; $j < 2; $j++)
-                    $norarr [$i][$j] =
+        $orderNotifications= $Admin->unreadNotifications->where('type' , 'App\Notifications\OrderPlaced');
+        $userdelNotifications = $Admin->unreadNotifications->where('type','App\Notifications\UserDeleted');
 
 
         $notifications = [
-
             [
 
                 'icon' => 'fas fa-fw fa-shopping-cart',
-                'text' =>  $userdelNotifications->pluck('data'),
-            ]
+                'text' => $orderNotifications->first()['data']['message'],
+
+            ] ,
+
+            [
+
+                'icon' => 'fas fa-fw fa-delete',
+                'text' =>  $userdelNotifications->first()['data']['message'],
+            ],
+
         ];
         $dropdownHtml = '';
 
@@ -50,13 +50,17 @@ class NotificationsController extends Controller
         }
 
         // Return the new notification data.
-        $userdelNotifications->markAsRead();
+            $orderNotifications->markAsRead();
+            $userdelNotifications->markAsRead();
+
+
         return [
             'label'       => count($notifications),
             'label_color' => 'danger',
             'icon_color'  => 'dark',
             'dropdown'    => $dropdownHtml,
         ];
+
 
     }
 }

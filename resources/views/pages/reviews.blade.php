@@ -5,7 +5,7 @@
 @section('title', 'Users')
 
 @section('content_header')
-    <h1>Users</h1>
+    <h1>Reviews</h1>
 @stop
 
 @section('content')

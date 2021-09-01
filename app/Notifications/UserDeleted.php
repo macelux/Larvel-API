@@ -56,7 +56,7 @@ class UserDeleted extends Notification
     public function toArray($notifiable)
     {
         return [
-           $this->user->full_name
+          "message" => $this->user->full_name. " has been deleted"
         ];
     }
 }

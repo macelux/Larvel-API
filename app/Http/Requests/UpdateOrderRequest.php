@@ -30,7 +30,7 @@ class UpdateOrderRequest extends FormRequest
             'status'=>Rule::in(['pending' , 'processing' , 'completed' , 'declined']),
             'grand_total' =>'numeric' ,
             'item_count' => 'numeric' ,
-            'payment_status' => [Rule::in(1 , 0)],
+            'payment_status' => [Rule::in("paid" , "not paid")],
             'payment_method' => 'string'
 
 

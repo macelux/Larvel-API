@@ -55,7 +55,7 @@
                     <td><?php echo e($order->grand_total); ?></td>
 
                     <td><?php echo e($order->item_count); ?></td>
-                    <td><?php echo e($order->payment_status==1?"paid":"not paid"); ?></td>
+                    <td><?php echo e($order->payment_status); ?></td>
                     <td><?php echo e($order->payment_method); ?></td>
                     <td>
                         <a class="btn btn-xs btn-default text-primary mx-1 shadow btn-inline" title="Edit " href = "<?php echo e(route('admin.orders.edit', $order->id )); ?>">

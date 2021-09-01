@@ -25,9 +25,6 @@ class AuthController extends Controller
         $user   = User::create($params);
         $user->password = Hash::make($request->password);
         $user->save();
-//        event(new Registered($user));
-////        $user->sendEmailVerificationNotification();
-//        return response(["message" => "check your email for a verification link in order to activate your account"]);
         return new UserResource($user);
     }
     public function login(LoginRequest $request)
