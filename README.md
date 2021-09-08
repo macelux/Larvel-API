@@ -19,8 +19,10 @@ This is an ecommerce API which can be used to manage orders , users , products a
 
 6. Generate an app encryption key - php artisan key:generate
 
-7. Migrate the database and its tables
+7. Create a new database for the application and let its name match with the name in the .env file
+ 
+9. Migrate tables to the database - php artisan migrate
 
-8. Start the application - php artisan serve
+10. Start the application - php artisan serve
 
 
