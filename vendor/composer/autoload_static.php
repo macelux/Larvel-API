@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitdec59b9946911a1627d809fbd2688301
+class ComposerStaticInit06e9677247c2f3cf44ff14522cefa810
 {
     public static $files = array (
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
@@ -556,18 +556,15 @@ class ComposerStaticInitdec59b9946911a1627d809fbd2688301
         'App\\Http\\Controllers\\API\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/AuthController.php',
         'App\\Http\\Controllers\\API\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/CartController.php',
         'App\\Http\\Controllers\\API\\CheckoutController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/CheckoutController.php',
-        'App\\Http\\Controllers\\API\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/OrderController.php',
         'App\\Http\\Controllers\\API\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/ProductController.php',
         'App\\Http\\Controllers\\API\\ReviewController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/ReviewController.php',
         'App\\Http\\Controllers\\API\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/UsersController.php',
-        'App\\Http\\Controllers\\API\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\FileUpload' => __DIR__ . '/../..' . '/app/Http/Controllers/FileUpload.php',
         'App\\Http\\Controllers\\PhotoController' => __DIR__ . '/../..' . '/app/Http/Controllers/PhotoController.php',
         'App\\Http\\Controllers\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersController.php',
         'App\\Http\\Controllers\\WEB\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/WEB/AdminController.php',
         'App\\Http\\Controllers\\WEB\\Authcontroller' => __DIR__ . '/../..' . '/app/Http/Controllers/WEB/Authcontroller.php',
-        'App\\Http\\Controllers\\WEB\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/WEB/DashboardController.php',
         'App\\Http\\Controllers\\WEB\\NotificationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/WEB/NotificationsController.php',
         'App\\Http\\Controllers\\WEB\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/WEB/OrderController.php',
         'App\\Http\\Controllers\\WEB\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/WEB/ProductController.php',
@@ -5922,10 +5919,10 @@ class ComposerStaticInitdec59b9946911a1627d809fbd2688301
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitdec59b9946911a1627d809fbd2688301::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitdec59b9946911a1627d809fbd2688301::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitdec59b9946911a1627d809fbd2688301::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitdec59b9946911a1627d809fbd2688301::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit06e9677247c2f3cf44ff14522cefa810::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit06e9677247c2f3cf44ff14522cefa810::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit06e9677247c2f3cf44ff14522cefa810::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit06e9677247c2f3cf44ff14522cefa810::$classMap;
 
         }, null, ClassLoader::class);
     }
