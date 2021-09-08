@@ -6,6 +6,21 @@ This is an ecommerce API which can be used to manage orders , users , products a
 
 <b>Installation</b>
 
-The App can be cloned just like any github repository
-You can learn how to clone a github repository by clicking this <a href= "https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository">link </a>
+1. Clone the    repository
+
+
+2. Change directory into the folder that contains the repository
+
+3. Run composer install if you have any errors , delete the vendor folder run composer install again and there will be no errors
+
+4. Install NPM Dependencies -   npm install
+
+5. Create a copy of your .env file - cp .env.example .env
+
+6. Generate an app encryption key - php artisan key:generate
+
+7. Migrate the database and its tables
+
+8. Start the application - php artisan serve
+
 
