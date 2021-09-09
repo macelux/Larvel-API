@@ -12,6 +12,7 @@ use Illuminate\Contracts\Auth\CanResetPassword;
 //, CanResetPassword
 class Admin extends Authenticatable implements MustVerifyEmail , CanResetPassword
 {
+    use HasFactory;
     use Notifiable;
     use \Illuminate\Auth\Passwords\CanResetPassword;
     

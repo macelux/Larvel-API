@@ -29,10 +29,10 @@ class AdminController extends Controller
     public function store(StoreAdminRequest $request)
     {
 
-        $params = $request->except('_token', 'password');
+        $params = $request->except('_token');
 
         $admin = Admin::create($params);
-        $admin->password = Hash::make($request->password);
+        $admin->password = Hash::make($admin->password);
         $admin->save();
         session()->flash("message" , "Admin registered Sucessfully , Email verifcation needed to activate account");
         event(new Registered($admin));

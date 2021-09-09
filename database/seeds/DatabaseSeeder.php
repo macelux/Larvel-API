@@ -26,6 +26,10 @@ class DatabaseSeeder extends Seeder
         $admin->is_super = 1;
         $admin->save();
 
+        User::factory()->count(50)->create();
+        Admin::factory()->count(10)->create();
+
+
 
         
 

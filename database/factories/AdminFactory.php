@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Hash;
 
 class AdminFactory extends Factory
 {
@@ -24,8 +25,8 @@ class AdminFactory extends Factory
     {
         return [
             'name'      =>  $this->faker->name,
-            'email'     =>  'admin@admin.com',
-            'password'  =>  bcrypt('password')
+            'email'     =>   $this->faker->unique()->safeEmail,
+            'password'  =>  Hash::make('password')
             //
         ];
     }

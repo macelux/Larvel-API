@@ -21,9 +21,9 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $request->headers->set('Accept' , 'application/json');
-        $params = $request->except('_token' , 'password');
+        $params = $request->except('_token');
         $user   = User::create($params);
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make($user->password);
         $user->save();
         return new UserResource($user);
     }

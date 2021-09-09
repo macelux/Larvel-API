@@ -41,40 +41,6 @@
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="control-label" for="grand_total">	GrandTotal</label>
-                                    <input
-                                            class="form-control @error('grand_total') is-invalid @enderror"
-                                            type="text"
-                                            placeholder="Enter order GrandTotal"
-                                            id="grand_total"
-                                            name="grand_total"
-                                            value="{{ old('grand_total', $order->grand_total) }}"
-                                    />
-                                    <div class="invalid-feedback active">
-                                        <i class="fa fa-exclamation-circle fa-fw"></i> @error('grand_total') <span>{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="control-label" for="item_count">	ItemCount </label>
-                                    <input
-                                            class="form-control @error('item_count') is-invalid @enderror"
-                                            type="text"
-                                            placeholder="Enter order ItemCount"
-                                            id="item_count"
-                                            name="item_count"
-                                            value="{{ old('item_count', $order->item_count) }}"                                    />
-                                    <div class="invalid-feedback active">
-                                        <i class="fa fa-exclamation-circle fa-fw"></i> @error('item_count') <span>{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
                                     <label class="control-label" for="payment_status">	PaymentStatus</label>
                                     <input
                                             class="form-control @error('payment_status') is-invalid @enderror"

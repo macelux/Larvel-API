@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\CartItem;
 use App\Models\Product;
@@ -13,11 +14,13 @@ use Illuminate\Support\Facades\DB;
 use App\Models\CartProduct;
 
 
+
 class CartController extends Controller
 {
 
     public function createCart()
     {
+
         $cart = Cart::create();
         $cart->customer_id = auth()->user()->id;
         $cart->save();
@@ -45,8 +48,10 @@ class CartController extends Controller
 
         $product->quantity = $product->quantity - $request->quantity;
         $product->save();
+        $cartitem = CartProduct::where([['cart_id', $request->cart_id], ['product_id', $request->product_id]])->first();
 
-        if ($cart->products->contains($product)) {
+        if ($cartitem) {
+
             $cartitem = CartProduct::where([['cart_id', $request->cart_id], ['product_id', $request->product_id]])->first();
             DB::table('cart_product')
                 ->where([['cart_id', $request->cart_id], ['product_id', $request->product_id]])

@@ -32,11 +32,11 @@ class Order extends Model
     }
     public function setPaymentStatusAttribute($value)
     {
-        $value = "paid"?1:0;
+//        $value = ("paid"?1:0);
 //        $this->
-        $this->attributes['payment_status'] =$value;
+        $this->attributes['payment_status'] = ($value=="paid"?1:0);
     }
-    protected $casts = [
-        'payment_status' => 'boolean',
-    ];
+//    protected $casts = [
+//        'payment_status' => 'boolean',
+//    ];
 }

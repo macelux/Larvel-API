@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 
-class Product extends Model
+class Product extends Modeln
 {
     use HasFactory;
      protected $table = 'products';
@@ -40,7 +40,7 @@ class Product extends Model
      }
     public function reviews()
     {
-        return $this->belongsToMany(Review::class);
+        return $this->hasMany(Review::class);
     }
     public function orders()
     {

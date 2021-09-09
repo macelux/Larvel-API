@@ -31,10 +31,7 @@ class ReviewController extends Controller
         $request->headers->set('Accept' , 'application/json');
         $params = $request->except('_token');
         $Review = Review::create($params);
-        Product_review::create([
-            "product_id" => $request->product_id,
-            "review_id" =>$Review->id
-            ]);
+
         return new  ReviewResource($Review);
 
 

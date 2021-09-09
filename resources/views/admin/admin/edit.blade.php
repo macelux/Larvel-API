@@ -68,7 +68,9 @@
                                 <div class="row d-print-none mt-2">
                                     <div class="col-12 text-right">
                                         <button class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update Admin</button>
+                                        @if(url()->current() == "http://127.0.0.1:8000/admin/edit/$Admin->id")
                                         <a class="btn btn-danger" href="{{ route('admins.index') }}"><i class="fa fa-fw fa-lg fa-arrow-left"></i>Go Back</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

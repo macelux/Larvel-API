@@ -33,11 +33,11 @@
 
                     <td>{{$review->user->fullname}}</td>
 
-                    @foreach($review->product as $product)
 
 
-                        <td>{{$product->name }}</td>
-                    @endforeach
+
+                        <td>{{$review->product->name }}</td>
+
 
                     <td>{{$review->	body}}</td>
 
