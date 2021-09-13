@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Http\Middleware;
@@ -28,7 +29,8 @@ class adminLogin
         {
             return $next($request);
         }
-        else
+        else{ 
             return response(['message' => 'unauthorized']);
+        }
     }
 }
