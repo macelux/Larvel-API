@@ -38,19 +38,13 @@
             <td> 	is_super</td>
             @can('is_super_admin')
                 <td> Actions</td>
-            @endcan
+            @endcan 
 
-
-
-
-
-
-
-        </tr>
+        </tr> 
         @foreach($Admins as $admin)
 
             <tr>
-                <td>{{$admin->count}}</td>
+                <td>{{$loop->iteration}}</td>
                 <td>{{$admin->name}}</td>
                 <td>{{$admin->email}}</td>
 
@@ -70,17 +64,7 @@
 
                         </div>
                     </td>
-                @endif
-
-
-
-
-
-
-
-
-
-
+                @endif 
 
             </tr>
         @endforeach

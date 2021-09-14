@@ -8,7 +8,6 @@ route::group([
 	prefix => 'admin'
 ], function(){
 	route::group([] function(){})
-
-
+ 
 	
 });

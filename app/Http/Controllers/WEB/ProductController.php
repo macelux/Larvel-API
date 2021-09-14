@@ -1,21 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\WEB;
-
-use Illuminate\Http\Request;
+ 
 use App\Http\Requests\StoreProductRequest;
-use App\Models\Product;
-use App\Http\Resources\ProductResource;
-use App\Http\Requests\UpdateProductRequest;
-use Illuminate\Http\RedirectResponse;
-use App\Providers\Created;
+use App\Models\Product; 
+use App\Http\Requests\UpdateProductRequest; 
 
 class ProductController 
 {
     
     public function index()
-    {
-
+    { 
         $products = Product::all();
         for($i  = 0 ; $i < count($products) ; $i++)
         {
@@ -23,12 +18,11 @@ class ProductController
         }
 
         return view('pages.products' , compact('products'));
+   }
 
-
-    }
     public function create()
     {
-      return view('admin.products.create');
+        return view('admin.products.create');
     }
 
     public function store(StoreProductRequest $request)
@@ -50,16 +44,13 @@ class ProductController
 
     public function edit($id)
     { 
-        $product = Product::findorfail($id);
-      
-
+        $product = Product::findorfail($id); 
       
         return view('admin.products.edit', compact('product'));
     }
 
     public function update(UpdateProductRequest $request)
-    {
-      
+    { 
       $params = $request->except('_token');
       
       $product = Product::findorfail($request->product_id);
@@ -70,8 +61,7 @@ class ProductController
 
     }
     public function destroy($id)
-    {
-        
+    { 
         $product = Product::findorfail($id);
         $product->delete();
         session()->flash("message" , "Product deleted Sucessfully");

@@ -25,8 +25,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name'      =>  'required|max:255',
-            'sku'       =>  'required',
-            
+            'sku'       =>  'required', 
             'price'     =>  'required|regex:/^\d+(\.\d{1,2})?$/',
             'special_price'     =>  'required|regex:/^\d+(\.\d{1,2})?$/',
             'quantity'  =>  'required|numeric',  

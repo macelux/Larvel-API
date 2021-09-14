@@ -28,11 +28,6 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->count(50)->create();
         Admin::factory()->count(10)->create();
-
-
-
-        
-
-
+ 
     }
 }

@@ -32,6 +32,7 @@ use App\Http\Controllers\API\VerificationController;
 Route::post('/login', [AuthController::class , 'login']);
 Route::post('/register',[AuthController::class , 'register']);
 Route::get('/logout', [AuthController::class , 'logout']);
+
 Route::group(['middleware' => ['jwt.verify']] , function(){
     Route::get('/logout', [AuthController::class , 'logout']);
 
@@ -39,13 +40,12 @@ Route::group(['middleware' => ['jwt.verify']] , function(){
         Route::get('/show' , [ProductController::class , 'show']);
 
     });
+
     Route::group(['prefix' =>'user'] , function(){
         Route::get('/show/{id}' ,[UsersController::class , 'show']);
         Route::put('/update/{id}' , [UsersController::class , 'update']);
         Route::delete('/delete/{id}' , [UsersController::class , 'destroy']);
-    });
-
-
+    }); 
 
     Route::group(['prefix' =>'cart'] , function(){
         Route::get('/create' , [CartController::class , 'createCart']);
@@ -54,6 +54,7 @@ Route::group(['middleware' => ['jwt.verify']] , function(){
         Route::delete('/delete' , [CartController::class , 'removeItem']);
         Route::delete('/clear/{id}' , [CartController::class , 'clearCart']);
     });
+    
     Route::post('/checkout/order', 'API\CheckoutController@placeOrder')->name('checkout.place.order');
 
     Route::group(['prefix' =>'reviews'] , function(){

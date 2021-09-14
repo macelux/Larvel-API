@@ -9,6 +9,7 @@ use App\Http\Requests\StoreAdminRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdateAdminRequest;
+use App\Http\Resources\AdminResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Session;
@@ -31,9 +32,10 @@ class AdminController extends Controller
 
         $params = $request->except('_token');
 
-        $admin = Admin::create($params);
-        $admin->password = Hash::make($admin->password);
-        $admin->save();
+        $params['password'] = Hash::make($request->password);
+
+        $admin = Admin::create($params); 
+
         session()->flash("message" , "Admin registered Sucessfully , Email verifcation needed to activate account");
         event(new Registered($admin));
 
@@ -41,18 +43,12 @@ class AdminController extends Controller
 
 
     }
+    
     public function index()
-    {
-
-        $Admins = Admin::all();
-        for($i  = 0 ; $i < count($Admins) ; $i++)
-        {
-            $Admins[$i]->count = $i + 1;
-        }
-
-        return view('pages.admin' , compact('Admins'));
-
-
+    { 
+        $Admins = AdminResource::collection(Admin::get()); 
+        
+        return view('pages.admin' , compact('Admins')); 
     }
 
     public function editprofile()
