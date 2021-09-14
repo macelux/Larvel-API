@@ -19,8 +19,7 @@ class NotificationsController extends Controller
 
 
         $notifications = [
-            [
-
+            [ 
                 'icon' => 'fas fa-fw fa-shopping-cart',
                 'text' => $orderNotifications->first()['data']['message'],
 

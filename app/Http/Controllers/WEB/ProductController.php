@@ -32,19 +32,19 @@ class ProductController
     }
 
     public function store(StoreProductRequest $request)
-    {
+    {   
+        $params = $request->except(['_token','status', 'featured']); 
 
-        $params = $request->except('_token');
+        $product = Product::create($params);  
 
-        $product = Product::create($params);
+        $request->has('status') ? $product->status =1 : $product->status = 0 ;
+        $request->has('featured') ? $product->featured =1 : $product->featured = 0 ;
+
         $product->save();
+        
         session()->flash("message" , "Product added Sucessfully");
-        return redirect()->route('products.index');
 
-
-
-
-
+        return redirect()->route('products.index');  
     }
 
 

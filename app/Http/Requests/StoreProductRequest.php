@@ -29,7 +29,7 @@ class StoreProductRequest extends FormRequest
             
             'price'     =>  'required|regex:/^\d+(\.\d{1,2})?$/',
             'special_price'     =>  'required|regex:/^\d+(\.\d{1,2})?$/',
-            'quantity'  =>  'required|numeric'
+            'quantity'  =>  'required|numeric',  
         ];
     }
 }
